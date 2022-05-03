@@ -19,7 +19,7 @@ namespace CarsDB_MVC.Data
                 cmd.CommandText = "insert into Clients(Name,Surname,LastName) values (@name,@surname,@lastname);";
                 cmd.Connection = con;
                 cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@surname", surname;
+                cmd.Parameters.AddWithValue("@surname", surname);
                 cmd.Parameters.AddWithValue("@lastname", lastname);
                 cmd.ExecuteNonQuery();
             }
