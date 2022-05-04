@@ -9,7 +9,7 @@ namespace CarsDB_MVC.Data
 {
     class ProductData
     {
-        public int AddRentACar(int clientID,int carID)
+        public void AddRentACar(int clientID,int carID)
         {
             var con = Database.Connection();
             con.Open();
@@ -23,22 +23,22 @@ namespace CarsDB_MVC.Data
                 if (CheckIfContainsCarID(carID) && CheckIfContainsClientID(clientID))
                 {
                     cmd.ExecuteNonQuery();
-                    return 0;
+                    
                 }
                 else if (CheckIfContainsCarID(carID) && !CheckIfContainsClientID(clientID))
                 {
                     //kogato nqma id na klient
-                    return 1;
+
                 }
                 else if (CheckIfContainsClientID(clientID) && !CheckIfContainsCarID(carID))
                 {
                     //kogato nqma id na kolata
-                    return 2;
+                    
                 }
                 else
                 {
                     //kogato nqma i dvete
-                    return 3;
+                    
                 }
                 
             }
@@ -114,6 +114,23 @@ namespace CarsDB_MVC.Data
                 cmd.Parameters.AddWithValue("@surname", surname);
                 cmd.Parameters.AddWithValue("@lastname", lastname);
                 cmd.ExecuteNonQuery();
+            }
+        }
+        public void ShowAllClients()
+        {
+            var con = Database.Connection();
+            con.Open();
+            using (con)
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "Select * from Clients;";
+                SqlDataReader rdr = cmd.ExecuteReader();
+                Console.WriteLine(" {0} {1} {2} {3}",rdr.GetName(0), rdr.GetName(1), rdr.GetName(2),rdr.GetName(3));
+                while (rdr.Read())
+                {
+                    Console.WriteLine("{0} {1} {2} {3}", rdr.GetValue(0), rdr.GetValue(1), rdr.GetValue(2), rdr.GetValue(3));
+                }
             }
         }
     }

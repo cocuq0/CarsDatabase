@@ -24,5 +24,9 @@ namespace CarsDB_MVC.Business
         {
             productData.AddRentACar(rentACar.ClientID, rentACar.CarID);
         }
+        public void ShowAllCars()
+        {
+            
+        }
     }
 }
