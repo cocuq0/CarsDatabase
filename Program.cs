@@ -1,4 +1,5 @@
 ﻿using CarsDB_MVC.Data;
+using CarsDB_MVC.Presentation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,7 @@ namespace CarsDB_MVC
     {
         static void Main(string[] args)
         {
-            ProductData a = new ProductData();
-            
+            Display display = new Display();   
         }
     }
 }

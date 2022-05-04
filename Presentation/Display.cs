@@ -11,15 +11,46 @@ namespace CarsDB_MVC.Presentation
 {
     class Display
     {
+        private int menuInput;
         CarBusiness carBusiness = new CarBusiness();
+        public Display()
+        {
+            ShowMenu();
+        }
         public void ShowMenu()
         {
             Console.WriteLine(new string('-',40));
             Console.WriteLine(new string(' ',18) + "MENU" + new string(' ',18));
+            Console.WriteLine(new string('-', 40));
             Console.WriteLine("1 - Add new rented car");
             Console.WriteLine("2 - Add new client");
             Console.WriteLine("3 - Add new car");
-            Console.WriteLine("Press X or Q to exit");
+            Console.WriteLine("Press 0 to exit");
+            menuInput = int.Parse(Console.ReadLine());
+            MenuInteraction(menuInput);
+        }
+        public void MenuInteraction(int input)
+        {
+            switch (input)
+            {
+                default:
+                    break;
+                case 1:
+                    AddCar();
+                    ShowMenu();
+                    break;
+                case 2:
+                    AddClient();
+                    ShowMenu();
+                    break;
+                case 3:
+                    AddRentACar();
+                    ShowMenu();
+                    break;
+                case 0:
+                    break;
+            }
+            
         }
         public void AddClient()
         {
@@ -32,8 +63,9 @@ namespace CarsDB_MVC.Presentation
             client.LastName = Console.ReadLine();
             carBusiness.AddClient(client);
         }
-        public void AddCar(Car car)
+        public void AddCar()
         {
+            Car car = new Car();
             Console.WriteLine("Enter the model of the car");
             car.Model = Console.ReadLine();
             Console.WriteLine("Enter the price of the car");
@@ -51,6 +83,7 @@ namespace CarsDB_MVC.Presentation
             rentACar.ClientID = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter Car ID");
             rentACar.CarID = int.Parse(Console.ReadLine());
+            carBusiness.AddRentACar(rentACar);
         }
     }
 }
