@@ -9,7 +9,7 @@ namespace CarsDB_MVC.Data
 {
     class ProductData
     {
-        public void AddRentACar(int clientID,int carID)
+        public int AddRentACar(int clientID,int carID)
         {
             var con = Database.Connection();
             con.Open();
@@ -23,18 +23,22 @@ namespace CarsDB_MVC.Data
                 if (CheckIfContainsCarID(carID) && CheckIfContainsClientID(clientID))
                 {
                     cmd.ExecuteNonQuery();
+                    return 0;
                 }
                 else if (CheckIfContainsCarID(carID) && !CheckIfContainsClientID(clientID))
                 {
                     //kogato nqma id na klient
+                    return 1;
                 }
                 else if (CheckIfContainsClientID(clientID) && !CheckIfContainsCarID(carID))
                 {
                     //kogato nqma id na kolata
+                    return 2;
                 }
                 else
                 {
                     //kogato nqma i dvete
+                    return 3;
                 }
                 
             }
@@ -79,6 +83,37 @@ namespace CarsDB_MVC.Data
                 {
                     return false;
                 }
+            }
+        }
+        public void AddCar(string model, decimal price, int regNum, int year)
+        {
+            var con = Database.Connection();
+            con.Open();
+            using (con)
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "insert into Cars(Model,Price,RegistrationNumber,Year) values (@model,@price,@regNum,@year);";
+                cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@model", model);
+                cmd.Parameters.AddWithValue("@price", price);
+                cmd.Parameters.AddWithValue("@regNum", regNum);
+                cmd.Parameters.AddWithValue("@year", year);
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public void AddClient(string name, string surname, string lastname)
+        {
+            var con = Database.Connection();
+            con.Open();
+            using (con)
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "insert into Clients(Name,Surname,LastName) values (@name,@surname,@lastname);";
+                cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@surname", surname);
+                cmd.Parameters.AddWithValue("@lastname", lastname);
+                cmd.ExecuteNonQuery();
             }
         }
     }
