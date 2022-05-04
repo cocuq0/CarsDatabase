@@ -30,7 +30,7 @@ namespace CarsDB_MVC.Data
             using (con)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "select COUNT(ClientID) from RentACar where ClientID=@id;";
+                cmd.CommandText = "select COUNT(ClientID) from Clients where ClientID=@id;";
                 cmd.Parameters.AddWithValue("@id", clientID);
                 cmd.Connection = con;
                 int clientCount =int.Parse(cmd.ExecuteScalar().ToString());
@@ -51,7 +51,7 @@ namespace CarsDB_MVC.Data
             using (con)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "select COUNT(CarID) from RentACar where CarID=@id;";
+                cmd.CommandText = "select COUNT(CarID) from Cars where CarID=@id;";
                 cmd.Parameters.AddWithValue("@id", carID);
                 cmd.Connection = con;
                 int carCount = int.Parse(cmd.ExecuteScalar().ToString());
