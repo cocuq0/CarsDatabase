@@ -1,4 +1,5 @@
-﻿using CarsDB_MVC.Data;
+﻿using CarsDB_MVC.Business;
+using CarsDB_MVC.Data;
 using CarsDB_MVC.Presentation;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,6 @@ namespace CarsDB_MVC
     {
         static void Main(string[] args)
         {
-            Display display = new Display();   
-        }
+            Display display = new Display();        }
     }
 }

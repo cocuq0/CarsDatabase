@@ -20,9 +20,9 @@ namespace CarsDB_MVC.Business
         {
             productData.AddCar(car.Model, car.Price, car.RegNum, car.Year);
         }
-        public void AddRentACar(RentACar rentACar)
+        public void AddRentACar(int clientId, int carId)
         {
-            productData.AddRentACar(rentACar.ClientID, rentACar.CarID);
+            productData.AddRentACar(clientId, carId);
         }
         public void ShowAllCars()
         {

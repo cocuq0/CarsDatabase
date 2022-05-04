@@ -35,7 +35,7 @@ namespace CarsDB_MVC.Presentation
             {
                 default:
                     break;
-                case 1:
+                case 3:
                     AddCar();
                     ShowMenu();
                     break;
@@ -43,7 +43,7 @@ namespace CarsDB_MVC.Presentation
                     AddClient();
                     ShowMenu();
                     break;
-                case 3:
+                case 1:
                     AddRentACar();
                     ShowMenu();
                     break;
@@ -52,7 +52,7 @@ namespace CarsDB_MVC.Presentation
             }
             
         }
-        public void AddClient()
+        public void  AddClient()
         {
             Clients client = new Clients();
             Console.WriteLine("Enter the name of the client");
@@ -80,10 +80,29 @@ namespace CarsDB_MVC.Presentation
         {
             RentACar rentACar = new RentACar();
             Console.WriteLine("Enter Client ID");
-            rentACar.ClientID = int.Parse(Console.ReadLine());
+            int clientID = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter Car ID");
-            rentACar.CarID = int.Parse(Console.ReadLine());
-            carBusiness.AddRentACar(rentACar);
+            int carID = int.Parse(Console.ReadLine());
+            carBusiness.AddRentACar(clientID, carID);
         }
     }
+}
+if (productData.CheckIfContainsCarID(rentACar.CarID) == true && productData.CheckIfContainsClientID(rentACar.ClientID) == true)
+{
+    productData.AddRentACar(rentACar.ClientID, rentACar.CarID);
+}
+else if (productData.CheckIfContainsCarID(rentACar.CarID) == false && productData.CheckIfContainsClientID(rentACar.ClientID) == true)
+{
+    //kogato nqma CarID
+    Console.WriteLine("Kolata koqto se opitvate da dobavite ne sushtestvuva v bazata danni");
+}
+else if (productData.CheckIfContainsClientID(rentACar.ClientID) == false && productData.CheckIfContainsCarID(rentACar.CarID))
+{
+    //kogato nqma ClientID
+    Console.WriteLine("Klienta koqto se opitvate da dobavite ne sushtestvuva v bazata danni");
+}
+else
+{
+    //Kogato nqma i dvete
+    Console.WriteLine("Kolata i kolata koqto se opitvate da dobavite ne sushtestvuva v bazata danni");
 }

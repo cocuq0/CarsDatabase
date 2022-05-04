@@ -46,7 +46,6 @@
     <Compile Include="Business\CarBusiness.cs" />
     <Compile Include="Common\Car.cs" />
     <Compile Include="Common\Clients.cs" />
-    <Compile Include="Common\RentACar.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\ProductData.cs" />
     <Compile Include="Presentation\Display.cs" />
