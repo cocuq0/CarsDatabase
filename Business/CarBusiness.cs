@@ -14,15 +14,23 @@ namespace CarsDB_MVC.Business
         ProductData productData = new ProductData();
         public void AddClient(Clients client)
         {
-            productData.AddClient(client.Name,client.Surname,client.LastName);
+            productData.AddClient(client.ClientID, client.Name,client.Surname,client.LastName);
         }
         public void AddCar(Car car)
         {
-            productData.AddCar(car.Model, car.Price, car.RegNum, car.Year);
+            productData.AddCar(car.CarID, car.Model, car.Price, car.RegNum, car.Year);
         }
         public void AddRentACar(int clientId, int carId)
         {
             productData.AddRentACar(clientId, carId);
+        }
+        public bool CheckIfContainsClientID(int clientID)
+        {
+            return productData.CheckIfContainsClientID(clientID);
+        }
+        public bool CheckIfContainsCarID(int carID)
+        {
+            return productData.CheckIfContainsCarID(carID);
         }
         public void ShowAllCars()
         {

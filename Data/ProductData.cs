@@ -20,27 +20,7 @@ namespace CarsDB_MVC.Data
                 cmd.Parameters.AddWithValue("@carID", carID);
                 cmd.Parameters.AddWithValue("@clientID", clientID);
                 cmd.Connection = con;
-                if (CheckIfContainsCarID(carID) && CheckIfContainsClientID(clientID))
-                {
-                    cmd.ExecuteNonQuery();
-                    
-                }
-                else if (CheckIfContainsCarID(carID) && !CheckIfContainsClientID(clientID))
-                {
-                    //kogato nqma id na klient
-
-                }
-                else if (CheckIfContainsClientID(clientID) && !CheckIfContainsCarID(carID))
-                {
-                    //kogato nqma id na kolata
-                    
-                }
-                else
-                {
-                    //kogato nqma i dvete
-                    
-                }
-                
+                cmd.ExecuteNonQuery();
             }
         }
         public bool CheckIfContainsClientID(int clientID)
@@ -85,15 +65,16 @@ namespace CarsDB_MVC.Data
                 }
             }
         }
-        public void AddCar(string model, decimal price, int regNum, int year)
+        public void AddCar(int carID,string model, decimal price, string regNum, int year)
         {
             var con = Database.Connection();
             con.Open();
             using (con)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "insert into Cars(Model,Price,RegistrationNumber,Year) values (@model,@price,@regNum,@year);";
+                cmd.CommandText = "insert into Cars(CarID,Model,Price,RegNumber,Year) values (@carID,@model,@price,@regNum,@year);";
                 cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@carID",carID);
                 cmd.Parameters.AddWithValue("@model", model);
                 cmd.Parameters.AddWithValue("@price", price);
                 cmd.Parameters.AddWithValue("@regNum", regNum);
@@ -101,15 +82,16 @@ namespace CarsDB_MVC.Data
                 cmd.ExecuteNonQuery();
             }
         }
-        public void AddClient(string name, string surname, string lastname)
+        public void AddClient(int clientID, string name, string surname, string lastname)
         {
             var con = Database.Connection();
             con.Open();
             using (con)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "insert into Clients(Name,Surname,LastName) values (@name,@surname,@lastname);";
+                cmd.CommandText = "insert into Clients(ClientID,Name,Surname,LastName) values (@clientID,@name,@surname,@lastname);";
                 cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@clientID", clientID);
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@surname", surname);
                 cmd.Parameters.AddWithValue("@lastname", lastname);

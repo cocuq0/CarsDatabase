@@ -13,6 +13,7 @@ namespace CarsDB_MVC
     {
         static void Main(string[] args)
         {
-            Display display = new Display();        }
+            Display display = new Display();       
+        }
     }
 }

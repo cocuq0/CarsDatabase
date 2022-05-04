@@ -8,15 +8,17 @@ namespace CarsDB_MVC.Common
 {
     class Car
     {
+        public int CarID { get; set; }
         public string Model { get; set; }
         public decimal Price { get; set; }
-        public int RegNum { get; set; }
+        public string RegNum { get; set; }
         public int Year { get; set; }
         public Car()
         {
+            CarID = 0;
             Model = null;
             Price = 0;
-            RegNum = 0;
+            RegNum = null;
             Year = 0;
 
         }

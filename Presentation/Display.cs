@@ -47,14 +47,14 @@ namespace CarsDB_MVC.Presentation
                     AddRentACar();
                     ShowMenu();
                     break;
-                case 0:
-                    break;
             }
             
         }
         public void  AddClient()
         {
             Clients client = new Clients();
+            Console.WriteLine("Enter the ID of hte client");
+            client.ClientID = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter the name of the client");
             client.Name = Console.ReadLine();
             Console.WriteLine("Enter the surname of the client");
@@ -66,43 +66,78 @@ namespace CarsDB_MVC.Presentation
         public void AddCar()
         {
             Car car = new Car();
+            Console.WriteLine("Enter the ID of the car");
+            car.CarID = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter the model of the car");
             car.Model = Console.ReadLine();
             Console.WriteLine("Enter the price of the car");
             car.Price = decimal.Parse(Console.ReadLine());
             Console.WriteLine("Enter the registration number of the car");
-            car.RegNum = int.Parse(Console.ReadLine());
+            car.RegNum = Console.ReadLine();
             Console.WriteLine("Enter the production year of the car");
             car.Year = int.Parse(Console.ReadLine());
             carBusiness.AddCar(car);
         }
         public void AddRentACar()
         {
-            RentACar rentACar = new RentACar();
             Console.WriteLine("Enter Client ID");
             int clientID = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter Car ID");
             int carID = int.Parse(Console.ReadLine());
-            carBusiness.AddRentACar(clientID, carID);
+            if (carBusiness.CheckIfContainsCarID(carID) == true && carBusiness.CheckIfContainsClientID(clientID) == true)
+            {
+                carBusiness.AddRentACar(clientID,carID);
+            }
+            else if (carBusiness.CheckIfContainsCarID(carID) == false && carBusiness.CheckIfContainsClientID(clientID) == true)
+            {
+                //kogato nqma CarID
+                Console.WriteLine("Kolata koqto se opitvate da dobavite ne sushtestvuva v bazata danni");
+                Console.WriteLine("Iskate li da q dobavite (Y/n)");
+                string input = Console.ReadLine().ToLower();
+                if (input == "y")
+                {
+                    AddCar();
+                    ShowMenu();
+                }
+                else
+                {
+                    Console.WriteLine("Cancelling...");
+                }
+            }
+            else if (carBusiness.CheckIfContainsClientID(clientID) == false && carBusiness.CheckIfContainsCarID(carID) == true)
+            {
+                //kogato nqma ClientID
+                Console.WriteLine("Klienta koqto se opitvate da dobavite ne sushtestvuva v bazata danni");
+                Console.WriteLine("Iskate li da q dobavite (Y/n)");
+                string input = Console.ReadLine().ToLower();
+                if (input == "y")
+                {
+                    AddClient();
+                    ShowMenu();
+                }
+                else
+                {
+                    Console.WriteLine("Cancelling...");
+                }
+
+            }
+            else if(carBusiness.CheckIfContainsCarID(carID) == false && carBusiness.CheckIfContainsClientID(clientID) == false)
+            {
+                //Kogato nqma i dvete
+                Console.WriteLine("Kolata i klienta koqto se opitvate da dobavite ne sushtestvuva v bazata danni");
+                Console.WriteLine("Iskate li da q dobavite (Y/n)");
+                string input = Console.ReadLine().ToLower();
+                if (input == "y")
+                {
+                    AddCar();
+                    AddClient();
+                    ShowMenu();
+                }
+                else
+                {
+                    Console.WriteLine("Cancelling...");
+                }
+            }
         }
     }
-}
-if (productData.CheckIfContainsCarID(rentACar.CarID) == true && productData.CheckIfContainsClientID(rentACar.ClientID) == true)
-{
-    productData.AddRentACar(rentACar.ClientID, rentACar.CarID);
-}
-else if (productData.CheckIfContainsCarID(rentACar.CarID) == false && productData.CheckIfContainsClientID(rentACar.ClientID) == true)
-{
-    //kogato nqma CarID
-    Console.WriteLine("Kolata koqto se opitvate da dobavite ne sushtestvuva v bazata danni");
-}
-else if (productData.CheckIfContainsClientID(rentACar.ClientID) == false && productData.CheckIfContainsCarID(rentACar.CarID))
-{
-    //kogato nqma ClientID
-    Console.WriteLine("Klienta koqto se opitvate da dobavite ne sushtestvuva v bazata danni");
-}
-else
-{
-    //Kogato nqma i dvete
-    Console.WriteLine("Kolata i kolata koqto se opitvate da dobavite ne sushtestvuva v bazata danni");
 }
