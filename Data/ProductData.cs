@@ -115,5 +115,39 @@ namespace CarsDB_MVC.Data
                 }
             }
         }
+        public void ShowAllCars()
+        {
+            var con = Database.Connection();
+            con.Open();
+            using (con)
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "Select * from Cars;";
+                SqlDataReader rdr = cmd.ExecuteReader();
+                Console.WriteLine(" {0} {1} {2} {3} {4}", rdr.GetName(0), rdr.GetName(1), rdr.GetName(2), rdr.GetName(3),rdr.GetName(4));
+                while (rdr.Read())
+                {
+                    Console.WriteLine("{0} {1} {2} {3} {4}", rdr.GetValue(0), rdr.GetValue(1), rdr.GetValue(2), rdr.GetValue(3),rdr.GetValue(4));
+                }
+            }
+        }
+        public void ShowAllRentedCars()
+        {
+            var con = Database.Connection();
+            con.Open();
+            using (con)
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "Select c.CarID,c.Model,c.Price,c.RegNumber,c.Year,cl.ClientID,cl.Name,cl.LastName from Cars as c inner join Clients as cl on c.CarID = c.CarID inner join RentACar as rc on c.CarID = rc.CarID and cl.ClientID = rc.ClientID;;";
+                SqlDataReader rdr = cmd.ExecuteReader();
+                Console.WriteLine(" {0} {1}", rdr.GetName(0), rdr.GetName(1));
+                while (rdr.Read())
+                {
+                    Console.WriteLine("{0} {1}", rdr.GetValue(0), rdr.GetValue(1));
+                }
+            }
+        }
     }
 }

@@ -32,9 +32,17 @@ namespace CarsDB_MVC.Business
         {
             return productData.CheckIfContainsCarID(carID);
         }
+        public void ShowAllClients()
+        {
+            productData.ShowAllClients();
+        }
         public void ShowAllCars()
         {
-            
+            productData.ShowAllCars();
+        }
+        public void ShowAllRentedCars()
+        {
+            productData.ShowAllRentedCars();
         }
     }
 }
