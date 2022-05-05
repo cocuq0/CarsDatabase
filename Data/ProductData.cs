@@ -142,10 +142,10 @@ namespace CarsDB_MVC.Data
                 cmd.Connection = con;
                 cmd.CommandText = "Select c.CarID,c.Model,c.Price,c.RegNumber,c.Year,cl.ClientID,cl.Name,cl.LastName from Cars as c inner join Clients as cl on c.CarID = c.CarID inner join RentACar as rc on c.CarID = rc.CarID and cl.ClientID = rc.ClientID;;";
                 SqlDataReader rdr = cmd.ExecuteReader();
-                Console.WriteLine(" {0} {1}", rdr.GetName(0), rdr.GetName(1));
+                Console.WriteLine(" {0} {1} {2} {3} {4} {5} {6} {7}", rdr.GetName(0), rdr.GetName(1));
                 while (rdr.Read())
                 {
-                    Console.WriteLine("{0} {1}", rdr.GetValue(0), rdr.GetValue(1));
+                    Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7}", rdr.GetValue(0), rdr.GetValue(1));
                 }
             }
         }
