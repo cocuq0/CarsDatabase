@@ -44,5 +44,9 @@ namespace CarsDB_MVC.Business
         {
             productData.ShowAllRentedCars();
         }
+        public void ClientInfo(int cid)
+        {
+            productData.ClientsInfo(cid);
+        }
     }
 }

@@ -142,10 +142,28 @@ namespace CarsDB_MVC.Data
                 cmd.Connection = con;
                 cmd.CommandText = "Select c.CarID,c.Model,c.Price,c.RegNumber,c.Year,cl.ClientID,cl.Name,cl.LastName from Cars as c inner join Clients as cl on c.CarID = c.CarID inner join RentACar as rc on c.CarID = rc.CarID and cl.ClientID = rc.ClientID;;";
                 SqlDataReader rdr = cmd.ExecuteReader();
-                Console.WriteLine(" {0} {1} {2} {3} {4} {5} {6} {7}", rdr.GetName(0), rdr.GetName(1));
+                Console.WriteLine(" {0} {1} {2} {3} {4} {5} {6} {7}", rdr.GetName(0), rdr.GetName(1), rdr.GetName(2), rdr.GetName(3), rdr.GetName(4), rdr.GetName(5), rdr.GetName(6), rdr.GetName(7));
                 while (rdr.Read())
                 {
-                    Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7}", rdr.GetValue(0), rdr.GetValue(1));
+                    Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7}", rdr.GetValue(0), rdr.GetValue(1), rdr.GetValue(2), rdr.GetValue(3), rdr.GetValue(4), rdr.GetValue(5), rdr.GetValue(6), rdr.GetValue(7));
+                }
+            }
+        }
+        public void ClientsInfo(int cid)
+        {
+            var con = Database.Connection();
+            con.Open();
+            using (con)
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "Select cl.ClientID,c.Model,c.Price,c.RegNumber,c.Year,cl.ClientID,cl.Name,cl.LastName from RentACar as rc inner join Clients as cl on @cid = rc.ClientID and cl.ClientID = rc.ClientID inner join Cars as c on rc.CarID = c.CarID;";
+                cmd.Parameters.AddWithValue("@cid", cid);
+                SqlDataReader rdr = cmd.ExecuteReader();
+                Console.WriteLine(" {0} {1} {2} {3} {4} {5} {6} {7}", rdr.GetName(0), rdr.GetName(1),rdr.GetName(2), rdr.GetName(3), rdr.GetName(4), rdr.GetName(5), rdr.GetName(6), rdr.GetName(7));
+                while (rdr.Read())
+                {
+                    Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7}", rdr.GetValue(0), rdr.GetValue(1), rdr.GetValue(2), rdr.GetValue(3), rdr.GetValue(4), rdr.GetValue(5), rdr.GetValue(6), rdr.GetValue(7));
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using CarsDB_MVC.Business;
 using CarsDB_MVC.Data;
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,7 @@ namespace CarsDB_MVC.Presentation
             Console.WriteLine("4 - Show all clients");
             Console.WriteLine("5 - Show all cars");
             Console.WriteLine("6 - Show all rented cars");
+            Console.WriteLine("7 - Show a clients info");
             Console.WriteLine("Press 0 to exit");
             menuInput = int.Parse(Console.ReadLine());
             MenuInteraction(menuInput);
@@ -37,6 +39,10 @@ namespace CarsDB_MVC.Presentation
             switch (input)
             {
                 default:
+                    break;
+                case 7:
+                    ShowClientInfo();
+                    ShowMenu();
                     break;
                 case 6:
                     ShowAllRentedCars();
@@ -62,12 +68,15 @@ namespace CarsDB_MVC.Presentation
                     AddRentACar();
                     ShowMenu();
                     break;
+                case 0:
+                    QuitApplication();
+                    break;
             }
         }
         public void AddClient()
         {
             Clients client = new Clients();
-            Console.WriteLine("Enter the ID of hte client");
+            Console.WriteLine("Enter the ID of the client");
             client.ClientID = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter the name of the client");
             client.Name = Console.ReadLine();
@@ -165,6 +174,22 @@ namespace CarsDB_MVC.Presentation
         public void ShowAllCars()
         {
             carBusiness.ShowAllCars();
+        }
+        public void ShowClientInfo()
+        {
+            Console.WriteLine("Enter the ID of the client");
+            int cid = int.Parse(Console.ReadLine());
+            carBusiness.ClientInfo(cid);
+        }
+        public void QuitApplication()
+        {
+            Console.Write("Quiting");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write(".");
+                Thread.Sleep(200);
+            }
+            
         }
     }
 }
