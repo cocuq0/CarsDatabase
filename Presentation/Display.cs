@@ -21,16 +21,16 @@ namespace CarsDB_MVC.Presentation
         public void ShowMenu()
         {
             Console.WriteLine(new string('-', 40));
-            Console.WriteLine(new string(' ', 25) + "MENU" + new string(' ', 25));
+            Console.WriteLine(new string(' ', 15) + "MENU" + new string(' ', 15));
             Console.WriteLine(new string('-', 40));
-            Console.WriteLine(new string ('-',25) + "1 - Add new rented car");
-            Console.WriteLine(new string('-', 25) + "2 - Add new client");
-            Console.WriteLine(new string('-', 25) + "3 - Add new car");
-            Console.WriteLine(new string('-', 25) + "4 - Show all clients");
-            Console.WriteLine(new string('-', 25) + "5 - Show all cars");
-            Console.WriteLine(new string('-', 25) + "6 - Show all rented cars");
-            Console.WriteLine(new string('-', 25) + "7 - Show a clients info");
-            Console.WriteLine(new string('-', 25) + "Press 0 to exit");
+            Console.WriteLine("1 - Add new rented car");
+            Console.WriteLine("3 - Add new car");
+            Console.WriteLine("2 - Add new client");
+            Console.WriteLine("4 - Show all clients");
+            Console.WriteLine("5 - Show all cars");
+            Console.WriteLine("6 - Show all rented cars");
+            Console.WriteLine("7 - Show a clients info");
+            Console.WriteLine("Press 0 to exit");
             menuInput = int.Parse(Console.ReadLine());
             MenuInteraction(menuInput);
         }
